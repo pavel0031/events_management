@@ -1,0 +1,71 @@
+<div *ngIf="event" class="detail-shell">
+  <h3>{{ event.title }}</h3>
+  <p>{{ event.description }}</p>
+  <dl>
+    <div>
+      <dt>Type</dt>
+      <dd>{{ event.eventType }}</dd>
+    </div>
+    <div>
+      <dt>Start</dt>
+      <dd>{{ event.startDate | date: "medium" }}</dd>
+    </div>
+    <div>
+      <dt>End</dt>
+      <dd>{{ event.endDate | date: "medium" }}</dd>
+    </div>
+    <div>
+      <dt>Visibility</dt>
+      <dd>{{ event.isPublic ? "Public" : "Private" }}</dd>
+    </div>
+    <div>
+      <dt>Max attendees</dt>
+      <dd>{{ event.maxAttendees }}</dd>
+    </div>
+    <div>
+      <dt>Registrations</dt>
+      <dd>{{ registrations.length }}</dd>
+    </div>
+  </dl>
+
+  <div class="detail-actions">
+    <button type="button" (click)="edit.emit(event)">Edit</button>
+    <button type="button" class="danger" (click)="delete.emit(event)">
+      Delete
+    </button>
+    <button
+      type="button"
+      class="register"
+      (click)="toggleRegistration(); registerToggle.emit()"
+    >
+      Register attendee
+    </button>
+  </div>
+
+  <div class="register-panel" *ngIf="showRegistration">
+    <h4>Register attendee</h4>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="registrationName" />
+    <label>Email</label>
+    <input type="email" [(ngModel)]="registrationEmail" />
+    <div class="form-actions">
+      <button type="button" (click)="submitRegistration()">
+        Submit registration
+      </button>
+      <button type="button" class="secondary" (click)="toggleRegistration()">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="registration-list" *ngIf="registrations.length">
+    <h4>Attendees</h4>
+    <ul>
+      <li *ngFor="let reg of registrations">
+        <span>{{ reg.attendeeName }}</span>
+        <span>{{ reg.attendeeEmail }}</span>
+        <span>{{ reg.registrationDate | date: "short" }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

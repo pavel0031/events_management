@@ -1,0 +1,60 @@
+<div class="dashboard-shell">
+  <section class="hero-panel">
+    <div>
+      <h1>Event Dashboard</h1>
+      <p>
+        Quick overview of event activity and fast navigation to event pages.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button type="button" (click)="navigate('/events')">View events</button>
+      <button type="button" (click)="navigate('/events/create')">
+        Create event
+      </button>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <span class="stat-value">{{ totalEvents }}</span>
+      <span class="stat-label">Total events</span>
+    </article>
+    <article class="stat-card">
+      <span class="stat-value">{{ publicEvents }}</span>
+      <span class="stat-label">Public events</span>
+    </article>
+    <article class="stat-card">
+      <span class="stat-value">{{ privateEvents }}</span>
+      <span class="stat-label">Private events</span>
+    </article>
+  </section>
+  <section class="charts-grid">
+    <article class="chart-card">
+      <h2>Events by month</h2>
+      <div class="bar-chart">
+        <div *ngFor="let item of monthlyData" class="bar-slot">
+          <div class="bar" [style.height.%]="getBarHeight(item.count)">
+            <span *ngIf="item.count">{{ item.count }}</span>
+          </div>
+          <div class="label">{{ item.month }}</div>
+        </div>
+      </div>
+    </article>
+    <article class="chart-card">
+      <h2>Events by type</h2>
+      <div class="pie-chart" [style.background]="getPieGradient()"></div>
+      <div class="legend">
+        <span
+          *ngFor="let item of typeData; index as i"
+          [style.borderColor]="
+            ['#1976d2', '#ff9800', '#8bc34a', '#e91e63', '#00bcd4', '#9c27b0'][
+              i
+            ]
+          "
+        >
+          {{ item.type }} ({{ item.count }})
+        </span>
+      </div>
+    </article>
+  </section>
+</div>

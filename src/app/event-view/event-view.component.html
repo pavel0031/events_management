@@ -1,0 +1,91 @@
+<div class="page-shell" *ngIf="event">
+  <section class="page-header">
+    <div>
+      <h1>{{ event.title }}</h1>
+      <p>
+        Event details, editing, delete, and attendee registration are available
+        here.
+      </p>
+    </div>
+    <button type="button" class="secondary" routerLink="/events">
+      Back to event list
+    </button>
+  </section>
+
+  <article class="detail-card">
+    <app-event-details
+      [event]="event"
+      [registrations]="registrations"
+      (edit)="startEdit()"
+      (delete)="deleteEvent()"
+      (registrationSubmit)="registerAttendee($event)"
+    >
+    </app-event-details>
+  </article>
+
+  <article class="feedback-card" *ngIf="feedback">
+    {{ feedback }}
+  </article>
+
+  <article class="edit-card" *ngIf="editMode">
+    <h2>Edit event</h2>
+    <form (ngSubmit)="saveEdit()">
+      <label>Title</label>
+      <input type="text" [(ngModel)]="editEvent.title" name="title" required />
+
+      <label>Description</label>
+      <textarea
+        [(ngModel)]="editEvent.description"
+        name="description"
+      ></textarea>
+
+      <label>Start</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="editEvent.startDate"
+        name="startDate"
+        required
+      />
+
+      <label>End</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="editEvent.endDate"
+        name="endDate"
+        required
+      />
+
+      <label>Event type</label>
+      <select [(ngModel)]="editEvent.eventType" name="eventType">
+        <option>Conference</option>
+        <option>Workshop</option>
+        <option>Festival</option>
+        <option>Corporate</option>
+        <option>Fundraiser</option>
+      </select>
+
+      <label class="checkbox-row">
+        <input
+          type="checkbox"
+          [(ngModel)]="editEvent.isPublic"
+          name="isPublic"
+        />
+        <span>Public event</span>
+      </label>
+      <label>Max attendees</label>
+      <input
+        type="number"
+        min="1"
+        [(ngModel)]="editEvent.maxAttendees"
+        name="maxAttendees"
+      />
+
+      <div class="form-actions">
+        <button type="submit">Save changes</button>
+        <button type="button" class="secondary" (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </article>
+</div>

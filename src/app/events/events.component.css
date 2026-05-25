@@ -1,0 +1,235 @@
+.page-shell {
+  display: grid;
+  gap: 24px;
+  padding: 28px;
+}
+
+.hero-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #eaf4ff 100%);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 22px 60px rgba(15, 32, 68, 0.08);
+}
+
+.hero-panel h1 {
+  margin: 0;
+  font-size: 2.1rem;
+  letter-spacing: -0.03em;
+}
+
+.hero-panel p {
+  margin: 8px 0 0;
+  color: #475569;
+}
+
+.hero-panel button.primary {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.search-input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #dbeafe;
+  background: white;
+  color: #0f172a;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-meta {
+  color: #475569;
+  font-weight: 700;
+}
+
+.summary-panel {
+  padding: 20px 24px;
+  background: linear-gradient(90deg, #eff6ff 0%, #eef2ff 100%);
+  border-radius: 18px;
+  color: #0f172a;
+  font-weight: 700;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.event-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  min-height: 260px;
+  padding: 28px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.08),
+      transparent 36%
+    ),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 28px 70px rgba(15, 32, 68, 0.1);
+  transition:
+    transform 0.26s ease,
+    box-shadow 0.26s ease,
+    border-color 0.26s ease;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: -28px;
+  right: -28px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.14);
+  pointer-events: none;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(37, 99, 235, 0.28);
+  box-shadow: 0 34px 80px rgba(15, 32, 68, 0.14);
+}
+
+.event-card__top-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.event-date {
+  display: inline-flex;
+  align-items: center;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.event-date__separator {
+  margin: 0 8px;
+  color: #94a3b8;
+}
+
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.14);
+  color: #1d4ed8;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.event-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.event-status--public {
+  background: rgba(16, 185, 129, 0.16);
+  color: #047857;
+}
+
+.event-status--private {
+  background: rgba(249, 115, 22, 0.16);
+  color: #c2410c;
+}
+
+.event-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.event-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.85;
+  min-height: 80px;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-actions button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card-actions button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18);
+}
+
+.empty-state {
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 20px;
+  color: #475569;
+}

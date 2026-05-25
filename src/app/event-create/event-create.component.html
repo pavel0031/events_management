@@ -1,0 +1,77 @@
+<div class="page-shell">
+  <section class="page-header">
+    <div>
+      <h1>Create event</h1>
+      <p>Use this form to add a new event to the system.</p>
+    </div>
+    <button type="button" class="secondary" routerLink="/events">
+      Back to event list
+    </button>
+  </section>
+
+  <article class="form-card">
+    <form (ngSubmit)="save()">
+      <label>Title</label>
+      <input
+        type="text"
+        [(ngModel)]="event.title"
+        name="title"
+        placeholder="Event title"
+        required
+      />
+
+      <label>Description</label>
+      <textarea
+        [(ngModel)]="event.description"
+        name="description"
+        placeholder="Event description"
+      ></textarea>
+
+      <label>Start date & time</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="event.startDate"
+        name="startDate"
+        required
+      />
+
+      <label>End date & time</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="event.endDate"
+        name="endDate"
+        required
+      />
+
+      <label>Event type</label>
+      <select [(ngModel)]="event.eventType" name="eventType">
+        <option>Conference</option>
+        <option>Workshop</option>
+        <option>Festival</option>
+        <option>Corporate</option>
+        <option>Fundraiser</option>
+      </select>
+
+      <label class="checkbox-row">
+        <input type="checkbox" [(ngModel)]="event.isPublic" name="isPublic" />
+        <span>Public event</span>
+      </label>
+
+      <label>Maximum attendees</label>
+      <input
+        type="number"
+        min="1"
+        [(ngModel)]="event.maxAttendees"
+        name="maxAttendees"
+      />
+
+      <div class="form-actions">
+        <button type="submit">Create event</button>
+        <button type="button" class="secondary" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+    <p class="feedback" *ngIf="feedback">{{ feedback }}</p>
+  </article>
+</div>

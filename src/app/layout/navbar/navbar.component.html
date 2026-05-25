@@ -1,0 +1,7 @@
+<header class="navbar">
+  <div class="navbar-title">📅 Event Management Platform</div>
+  <div class="navbar-actions" *ngIf="authService.isLoggedIn()">
+    <span>{{ authService.getUserEmail() }}</span>
+    <button type="button" (click)="logout()">Logout</button>
+  </div>
+</header>

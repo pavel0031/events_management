@@ -1,0 +1,10 @@
+<div class="app-shell" [class.logged-in]="isLoggedIn()">
+  <app-navbar *ngIf="isLoggedIn()"></app-navbar>
+
+  <div class="content-shell">
+    <app-sidebar *ngIf="isLoggedIn()"></app-sidebar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

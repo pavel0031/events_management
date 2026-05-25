@@ -1,0 +1,73 @@
+<div class="page-shell">
+  <section class="hero-panel">
+    <div>
+      <h1>All events</h1>
+      <p>Browse events and open each event's detailed page.</p>
+    </div>
+    <button type="button" class="primary" routerLink="/events/create">
+      Create event
+    </button>
+  </section>
+
+  <section class="search-row">
+    <input
+      type="search"
+      placeholder="Search events by title, description, or type..."
+      [(ngModel)]="searchTerm"
+      (input)="onSearch(searchTerm)"
+      class="search-input"
+    />
+    <div class="search-meta">
+      Showing {{ displayedEvents.length }} of {{ totalEvents }}
+    </div>
+  </section>
+
+  <section class="event-grid">
+    <article class="event-card" *ngFor="let event of displayedEvents">
+      <div class="event-card__content">
+        <div class="event-card__top-row">
+          <div class="event-pill-group">
+            <span class="event-badge">{{ event.eventType }}</span>
+            <span
+              class="event-status"
+              [ngClass]="
+                event.isPublic
+                  ? 'event-status--public'
+                  : 'event-status--private'
+              "
+            >
+              {{ event.isPublic ? "Public" : "Private" }}
+            </span>
+          </div>
+          <span class="event-date">
+            {{ event.startDate | date: "MMM d" }}
+            <span class="event-date__separator">—</span>
+            {{ event.endDate | date: "MMM d" }}
+          </span>
+        </div>
+
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p>
+
+        <div class="meta-row">
+          <span>{{ event.maxAttendees }} seats</span>
+          <span>{{
+            event.isPublic ? "Open registration" : "Invite only"
+          }}</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button type="button" routerLink="/events/view/{{ event.id }}">
+          View details
+        </button>
+      </div>
+    </article>
+  </section>
+
+  <section class="empty-state" *ngIf="displayedEvents.length === 0">
+    <p>
+      No events match your search. Try a different term or create a new event.
+    </p>
+  </section>
+</div>
