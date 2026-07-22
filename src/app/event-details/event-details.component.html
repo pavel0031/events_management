@@ -22,9 +22,10 @@
       <dt>Max attendees</dt>
       <dd>{{ event.maxAttendees }}</dd>
     </div>
+   
     <div>
-      <dt>Registrations</dt>
-      <dd>{{ registrations.length }}</dd>
+      <dt>Total Attendees</dt>
+      <dd>{{ totalattendee }}</dd>
     </div>
   </dl>
 
@@ -38,12 +39,12 @@
       class="register"
       (click)="toggleRegistration(); registerToggle.emit()"
     >
-      Register attendee
+      Register Attendee
     </button>
   </div>
 
   <div class="register-panel" *ngIf="showRegistration">
-    <h4>Register attendee</h4>
+    <h4>Register Attendee Information</h4>
     <label>Name</label>
     <input type="text" [(ngModel)]="registrationName" />
     <label>Email</label>
@@ -58,14 +59,38 @@
     </div>
   </div>
 
-  <div class="registration-list" *ngIf="registrations.length">
+  <div class="registration-list" *ngIf="registrationAttendees.length > 0">
+  <h4>Attendees</h4>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Attendee Name</th>
+        <th>Email</th>
+        <th>Registration Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let reg of registrationAttendees; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ reg.attendeeName }}</td>
+        <td>{{ reg.attendeeEmail }}</td>
+        <td>{{ reg.registrationDate | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- <div class="registration-list" *ngIf="registrationAttendees.length">
     <h4>Attendees</h4>
     <ul>
-      <li *ngFor="let reg of registrations">
+      <li *ngFor="let reg of registrationAttendees">
         <span>{{ reg.attendeeName }}</span>
         <span>{{ reg.attendeeEmail }}</span>
         <span>{{ reg.registrationDate | date: "short" }}</span>
       </li>
     </ul>
-  </div>
+  </div> -->
 </div>

@@ -1,14 +1,14 @@
 .detail-shell {
-  border-radius: 18px;
+  border-radius: 4px;
 }
 
 .detail-shell h3 {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .detail-shell dl {
   display: grid;
-  gap: 12px;
+  gap: 4px;
 }
 
 .detail-shell dt {
@@ -24,11 +24,11 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 2px;
 }
 
 .detail-actions button {
-  padding: 10px 14px;
+  padding: 6px 10px;
   border: none;
   border-radius: 10px;
   font-weight: 700;
@@ -46,18 +46,18 @@
 }
 
 .register-panel {
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 16px;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
 }
 
 .register-panel input {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #d6dde9;
+  border: 2px solid #d6dde9;
   margin-top: 8px;
 }
 
@@ -66,7 +66,7 @@
   margin: 12px 0 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .registration-list li {
@@ -81,4 +81,47 @@
 .registration-list span {
   font-size: 0.9rem;
   color: #334155;
+}
+
+
+.secondary {
+  background-color: #ef4444;   /* Red */
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.secondary:hover {
+  background-color: #dc2626;   /* Darker red */
+}
+
+.secondary:active {
+  transform: scale(0.98);
+}
+.registration-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.registration-list table,
+.registration-list th,
+.registration-list td {
+  border: 1px solid #000;
+}
+
+.registration-list th,
+.registration-list td {
+  padding: 10px;
+  text-align: middle;
+}
+
+.registration-list th {
+  background-color: #f2f2f2;
+  font-weight: bold;
 }

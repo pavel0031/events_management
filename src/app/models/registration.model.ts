@@ -1,5 +1,5 @@
 export interface Registration {
-  AttendeeNo: number;
+  attendeeNo: number;
   eventNo: number;
   attendeeName: string;
   attendeeEmail: string;

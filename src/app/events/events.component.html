@@ -53,12 +53,12 @@
           <span>{{ event.maxAttendees }} seats</span>
           <span>{{
             event.isPublic ? "Open registration" : "Invite only"
-          }}</span>
+          }}</span>s
         </div>
       </div>
 
       <div class="card-actions">
-        <button type="button" routerLink="/events/view/{{ event.eventNo }}">
+        <button type="button" routerLink="/event/view/{{ event.eventNo }}">
           View details
         </button>
       </div>

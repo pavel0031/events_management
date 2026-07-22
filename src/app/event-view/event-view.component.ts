@@ -120,7 +120,7 @@ export class EventViewComponent implements OnInit {
       return;
     }
     this.eventService.addRegistration({
-      AttendeeNo: 0,
+      attendeeNo: 0,
       eventNo: this.event.eventNo,
       attendeeName: payload.name,
       attendeeEmail: payload.email,

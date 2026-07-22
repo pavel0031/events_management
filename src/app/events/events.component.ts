@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { EventItem } from '../models/event.model';
 
+
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -47,4 +48,5 @@ export class EventsComponent implements OnInit {
       );
     });
   }
+
 }

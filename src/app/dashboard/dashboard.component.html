@@ -16,15 +16,15 @@
 
   <section class="stats-grid">
     <article class="stat-card">
-      <span class="stat-value">{{ totalEvents }}</span>
+      <span class="stat-value"[ngStyle]="{color : totalEvents>0 ? 'Red' : 'Blue' }">{{ totalEvents }}</span>
       <span class="stat-label">Total events</span>
     </article>
     <article class="stat-card">
-      <span class="stat-value">{{ publicEvents }}</span>
+      <span class="stat-value" [ngStyle]="{color: publicEvents>0 ? 'Green' : 'Red'}">{{ publicEvents }}</span>
       <span class="stat-label">Public events</span>
     </article>
     <article class="stat-card">
-      <span class="stat-value">{{ privateEvents }}</span>
+      <span class="stat-value" [ngStyle]="{color: privateEvents>0 ? 'Magenta' : 'Red'}">{{ privateEvents }}</span>
       <span class="stat-label">Private events</span>
     </article>
   </section>

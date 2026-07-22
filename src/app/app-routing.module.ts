@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventCreateComponent } from './event-create/event-create.component';
 import { EventViewComponent } from './event-view/event-view.component';
 import { AuthGuard } from './services/auth.guard';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,9 +21,9 @@ const routes: Routes = [
     component: EventCreateComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'events/view/:eventNo',
-    component: EventViewComponent,
+  { 
+    path: 'event/view/:eventNo',
+    component: EventDetailsComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

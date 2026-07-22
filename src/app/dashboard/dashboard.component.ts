@@ -29,13 +29,38 @@ export class DashboardComponent implements OnInit {
         this.totalEvents = events.length;
         this.publicEvents = events.filter((item) => item.isPublic).length;
         this.privateEvents = events.filter((item) => !item.isPublic).length;
-        // this.monthlyData = this.eventService.getEventCountByMonth();
-        // this.typeData = this.eventService.getEventCountByType();
+        this.monthlyData = this.getEventCountByMonth(events);
+        this.typeData = this.getEventCountByType(events);
       },
       error: (err) => {
         console.error("Error loading events", err);
       }
     });
+  }
+
+  private getEventCountByMonth(events: any[]): Array<{ month: string; count: number }> {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const counts = new Array(12).fill(0);
+
+    events.forEach((event) => {
+      const date = new Date(event.startDate);
+      if (!Number.isNaN(date.getTime())) {
+        counts[date.getMonth()] += 1;
+      }
+    });
+
+    return months.map((month, index) => ({ month, count: counts[index] }));
+  }
+
+  private getEventCountByType(events: any[]): Array<{ type: string; count: number }> {
+    const totals: { [type: string]: number } = {};
+
+    events.forEach((event) => {
+      const type = event.eventType?.trim() || 'Unknown';
+      totals[type] = (totals[type] || 0) + 1;
+    });
+
+    return Object.keys(totals).map((type) => ({ type, count: totals[type] }));
   }
 
   navigate(path: string): void {
