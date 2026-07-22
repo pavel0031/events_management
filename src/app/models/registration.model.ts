@@ -1,6 +1,6 @@
 export interface Registration {
-  id: number;
-  eventId: number;
+  AttendeeNo: number;
+  eventNo: number;
   attendeeName: string;
   attendeeEmail: string;
   registrationDate: string;

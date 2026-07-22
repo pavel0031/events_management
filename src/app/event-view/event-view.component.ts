@@ -27,27 +27,36 @@ export class EventViewComponent implements OnInit {
   }
 
   loadEvent(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (!idParam) {
+    const eventNoParam = this.route.snapshot.paramMap.get('eventNo');
+    if (!eventNoParam) {
       this.router.navigate(['/events']);
       return;
     }
 
-    const eventId = Number(idParam);
-    this.event = this.eventService.getEventById(eventId) || null;
-    if (!this.event) {
+    const eventNo = Number(eventNoParam);
+    if (Number.isNaN(eventNo) || eventNo <= 0) {
       this.router.navigate(['/events']);
       return;
     }
 
-    this.registrations = this.eventService.getRegistrationsForEvent(eventId);
+    // load registrations after the event has been fetched
+    this.eventService.getEventById(eventNo).subscribe(
+      (data) => {
+        this.event = data;
+        this.registrations = this.eventService.getRegistrationsForEvent(eventNo);
+      },
+      () => {
+        // if the event couldn't be loaded, go back to list
+        this.router.navigate(['/events']);
+      },
+    );
   }
 
   createEmptyEvent(): EventItem {
     return {
-      id: 0,
-      title: '',
-      description: '',
+      eventNo: 0,
+      eventTitle: '',
+      eventDescription: '',
       startDate: '',
       endDate: '',
       eventType: 'Conference',
@@ -64,10 +73,9 @@ export class EventViewComponent implements OnInit {
     this.editEvent = { ...this.event };
     this.feedback = '';
   }
-
   saveEdit(): void {
     if (
-      !this.editEvent.title ||
+      !this.editEvent.eventTitle ||
       !this.editEvent.startDate ||
       !this.editEvent.endDate
     ) {
@@ -75,10 +83,18 @@ export class EventViewComponent implements OnInit {
       return;
     }
 
-    this.eventService.updateEvent(this.editEvent);
-    this.feedback = 'Event updated successfully.';
-    this.editMode = false;
-    this.loadEvent();
+    // call the HTTP update endpoint (service expects id + event)
+    this.eventService.updateEvent(this.editEvent.eventNo, this.editEvent).subscribe(
+      () => {
+        this.feedback = 'Event updated successfully.';
+        this.editMode = false;
+        this.loadEvent();
+      },
+      (err) => {
+        this.feedback = 'Failed to update event.';
+        console.error(err);
+      },
+    );
   }
 
   cancelEdit(): void {
@@ -90,8 +106,13 @@ export class EventViewComponent implements OnInit {
     if (!this.event) {
       return;
     }
-    this.eventService.deleteEvent(this.event.id);
-    this.router.navigate(['/events']);
+    this.eventService.deleteEvent(this.event.eventNo).subscribe(
+      () => this.router.navigate(['/events']),
+      (err) => {
+        this.feedback = 'Failed to delete event.';
+        console.error(err);
+      },
+    );
   }
 
   registerAttendee(payload: { name: string; email: string }): void {
@@ -99,14 +120,14 @@ export class EventViewComponent implements OnInit {
       return;
     }
     this.eventService.addRegistration({
-      id: 0,
-      eventId: this.event.id,
+      AttendeeNo: 0,
+      eventNo: this.event.eventNo,
       attendeeName: payload.name,
       attendeeEmail: payload.email,
       registrationDate: new Date().toISOString().slice(0, 16),
     });
     this.registrations = this.eventService.getRegistrationsForEvent(
-      this.event.id,
+      this.event.eventNo,
     );
     this.feedback = 'Attendee registered successfully.';
   }

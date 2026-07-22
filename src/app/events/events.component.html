@@ -46,8 +46,8 @@
           </span>
         </div>
 
-        <h3>{{ event.title }}</h3>
-        <p>{{ event.description }}</p>
+        <h3>{{ event.eventTitle }}</h3>
+        <p>{{ event.eventDescription }}</p>
 
         <div class="meta-row">
           <span>{{ event.maxAttendees }} seats</span>
@@ -58,7 +58,7 @@
       </div>
 
       <div class="card-actions">
-        <button type="button" routerLink="/events/view/{{ event.id }}">
+        <button type="button" routerLink="/events/view/{{ event.eventNo }}">
           View details
         </button>
       </div>

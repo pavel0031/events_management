@@ -21,7 +21,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'events/view/:id',
+    path: 'events/view/:eventNo',
     component: EventViewComponent,
     canActivate: [AuthGuard],
   },

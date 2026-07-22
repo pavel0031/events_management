@@ -20,9 +20,16 @@ export class EventsComponent implements OnInit {
   }
 
   loadEvents(): void {
-    this.events = this.eventService.getEvents();
-    this.displayedEvents = [...this.events];
-    this.totalEvents = this.events.length;
+    this.eventService.getAllEvents().subscribe({
+      next: (data) => {
+        this.events = data;
+        this.displayedEvents = [...this.events];
+        this.totalEvents = this.events.length;
+      },
+      error: (err) => {
+        console.error("Error loading events", err);
+      }
+    });
   }
 
   onSearch(term: string): void {
@@ -34,8 +41,8 @@ export class EventsComponent implements OnInit {
     }
     this.displayedEvents = this.events.filter((e) => {
       return (
-        e.title.toLowerCase().includes(q) ||
-        (e.description || '').toLowerCase().includes(q) ||
+        e.eventTitle.toLowerCase().includes(q) ||
+        (e.eventDescription || '').toLowerCase().includes(q) ||
         (e.eventType || '').toLowerCase().includes(q)
       );
     });

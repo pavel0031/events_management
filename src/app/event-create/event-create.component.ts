@@ -9,6 +9,53 @@ import { EventItem } from '../models/event.model';
   styleUrls: ['./event-create.component.css'],
 })
 export class EventCreateComponent {
+feedback: string = '';
+
+  event: EventItem = {
+    eventNo: 0,
+    eventTitle: '',
+    eventDescription: '',
+    startDate: '',
+    endDate: '',
+    eventType: '',
+    isPublic: false,
+    maxAttendees: 0
+  };
+
+  constructor(
+    private eventService: EventService,
+    private router: Router
+  ) {}
+
+  saveEvent() {
+  this.eventService.saveEvent(this.event).subscribe({
+    next: (response) => {
+      console.log("Event saved successfully", response);
+      alert("Event inserted successfully");
+
+      this.event = {
+        eventNo: 0,
+        eventTitle: '',
+        eventDescription: '',
+        startDate: '',
+        endDate: '',
+        eventType: '',
+        isPublic: false,
+        maxAttendees: 0
+      };
+    },
+    error: (error) => {
+      console.error("Insert failed", error);
+      alert("Failed to insert event");
+    }
+  });
+}
+
+  cancel(): void {
+    this.router.navigate(['/events']);
+  }
+}
+  /*
   event: EventItem = this.createEmptyEvent();
   feedback = '';
 
@@ -19,9 +66,9 @@ export class EventCreateComponent {
 
   createEmptyEvent(): EventItem {
     return {
-      id: 0,
-      title: '',
-      description: '',
+      eventNo: 0,
+      eventTitle: '',
+      eventDescription: '',
       startDate: '',
       endDate: '',
       eventType: 'Conference',
@@ -45,4 +92,5 @@ export class EventCreateComponent {
   cancel(): void {
     this.router.navigate(['/events']);
   }
-}
+    */
+

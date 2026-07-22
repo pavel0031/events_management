@@ -1,3 +1,4 @@
+
 <div class="page-shell">
   <section class="page-header">
     <div>
@@ -10,20 +11,20 @@
   </section>
 
   <article class="form-card">
-    <form (ngSubmit)="save()">
+    <form (ngSubmit)="saveEvent()">
       <label>Title</label>
       <input
         type="text"
-        [(ngModel)]="event.title"
-        name="title"
+        [(ngModel)]="event.eventTitle"
+        name="eventTitle"
         placeholder="Event title"
         required
       />
 
       <label>Description</label>
       <textarea
-        [(ngModel)]="event.description"
-        name="description"
+        [(ngModel)]="event.eventDescription"
+        name="eventDescription"
         placeholder="Event description"
       ></textarea>
 
@@ -78,3 +79,4 @@
     <p class="feedback" *ngIf="feedback">{{ feedback }}</p>
   </article>
 </div>
+

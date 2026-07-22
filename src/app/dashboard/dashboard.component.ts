@@ -24,12 +24,18 @@ export class DashboardComponent implements OnInit {
   }
 
   refreshStats(): void {
-    const events = this.eventService.getEvents();
-    this.totalEvents = events.length;
-    this.publicEvents = events.filter((item) => item.isPublic).length;
-    this.privateEvents = events.filter((item) => !item.isPublic).length;
-    this.monthlyData = this.eventService.getEventCountByMonth();
-    this.typeData = this.eventService.getEventCountByType();
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.totalEvents = events.length;
+        this.publicEvents = events.filter((item) => item.isPublic).length;
+        this.privateEvents = events.filter((item) => !item.isPublic).length;
+        // this.monthlyData = this.eventService.getEventCountByMonth();
+        // this.typeData = this.eventService.getEventCountByType();
+      },
+      error: (err) => {
+        console.error("Error loading events", err);
+      }
+    });
   }
 
   navigate(path: string): void {

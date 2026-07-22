@@ -12,6 +12,7 @@ import { EventCreateComponent } from './event-create/event-create.component';
 import { EventViewComponent } from './event-view/event-view.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { HttpClientModule }  from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,13 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     EventViewComponent,
     EventDetailsComponent,
     NavbarComponent,
-    SidebarComponent,
+    SidebarComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    FormsModule, 
+    AppRoutingModule , 
+    HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

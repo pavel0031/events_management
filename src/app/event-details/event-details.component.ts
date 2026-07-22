@@ -1,13 +1,32 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
 import { EventItem } from '../models/event.model';
 import { Registration } from '../models/registration.model';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.css'],
 })
-export class EventDetailsComponent {
+export class EventDetailsComponent implements OnInit {
+ events: EventItem[] = [];
+ constructor(private eventService: EventService){}
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.eventService.getAllEvents().subscribe({
+      next: (data) => {
+        this.events = data;
+        console.log(data);
+      },
+      error: (err) => {
+        console.error("Error loading events", err);
+      }
+    });
+  }
   @Input() event: EventItem | null = null;
   @Input() registrations: Registration[] = [];
   @Output() edit = new EventEmitter<EventItem>();

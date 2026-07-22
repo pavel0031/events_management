@@ -1,7 +1,7 @@
 <div class="page-shell" *ngIf="event">
   <section class="page-header">
     <div>
-      <h1>{{ event.title }}</h1>
+      <h1>{{ event.eventTitle }}</h1>
       <p>
         Event details, editing, delete, and attendee registration are available
         here.
@@ -31,12 +31,12 @@
     <h2>Edit event</h2>
     <form (ngSubmit)="saveEdit()">
       <label>Title</label>
-      <input type="text" [(ngModel)]="editEvent.title" name="title" required />
+      <input type="text" [(ngModel)]="editEvent.eventTitle" name="eventTitle" required />
 
       <label>Description</label>
       <textarea
-        [(ngModel)]="editEvent.description"
-        name="description"
+        [(ngModel)]="editEvent.eventDescription"
+        name="eventDescription"
       ></textarea>
 
       <label>Start</label>
